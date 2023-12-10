@@ -15,6 +15,7 @@ module.exports = {
             }
 
             let email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            let phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 
             if(email_regex.test(req.body.email))
             {
@@ -27,6 +28,19 @@ module.exports = {
                     },
                 ]);
             }
+
+            if(phoneno.test(req.body.contactno))
+            {
+                   
+            }else{
+                return resp.send([
+                    {
+                        "Status": "Fail",
+                        "message": "Invalid Mobile No."
+                    },
+                ]);
+            }
+            
 
             //Generate salt to hash the password
             const salt = await bcrypt.genSalt(10);
